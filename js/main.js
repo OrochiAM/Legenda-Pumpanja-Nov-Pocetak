@@ -38,11 +38,13 @@ textTl
     },
     '<'
   );
+
 textTl.pause();
 
 const sipka = document.querySelector('.pozadi');
 const bar = document.querySelector('.bar');
 const procenatText = document.querySelector('.procenat');
+
 let height = sipka.clientHeight;
 console.log(height);
 
@@ -57,6 +59,30 @@ console.log(offsetStart.bottom);
 let over = false;
 let old;
 let barValue = 0;
+
+// RESPONSIVE
+
+addEventListener('resize', () => {
+  Draggable.get(sipka).kill();
+
+  //VRATI SIPKU NA POCETAK ZBOG OFFSETA
+  gsap.to(sipka, {
+    y: '0',
+    duration: 0,
+  });
+
+  height = sipka.clientHeight;
+  offsetStart = sipka.getBoundingClientRect().bottom + 10;
+
+  Draggable.create(sipka, {
+    type: 'y',
+    bounds: { minY: 10, maxY: -(height * 0.7) },
+  });
+  old = offsetStart;
+  console.log(height + ' ' + offsetStart);
+});
+
+// PUMPANJE
 
 setInterval(() => {
   let offset = sipka.getBoundingClientRect();
@@ -73,12 +99,10 @@ setInterval(() => {
       audioExp.play();
       // let audioPum = new Audio('sounds/pumpaj.mp3');
       // audioPum.play();
-      console.log('AAAA');
+      console.log('PUMP IT!');
       textTl.play();
       over = true;
     }
-
-    console.log(barValue);
 
     let audio = new Audio('sounds/jump.wav');
     audio.play();
