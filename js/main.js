@@ -1,9 +1,56 @@
 // TEXT ANIMACIJA
 
-let width = window.innerWidth * 0.11;
 const text = document.querySelector('.pumpaj-text');
 const textTl = gsap.timeline();
 const layer = document.querySelector('.layer');
+
+// FUNKICJA KOJA MENJA WIDTH U TIMELINE-U KADA SE PROMENI VELICINA EKRANA
+
+const updateTimeline = () => {
+  textTl.kill();
+  textTl
+    .to(
+      layer,
+      {
+        opacity: 1,
+        duration: 0.5,
+      },
+      '<'
+    )
+    .to(
+      '.exp',
+      {
+        opacity: 1,
+        duration: 1,
+      },
+      '<'
+    )
+    .to(
+      text,
+      {
+        display: 'flex',
+      },
+      '<'
+    )
+    .fromTo(
+      text,
+      {
+        bottom: '50px',
+        fontSize: 50,
+        duration: 0.5,
+      },
+      {
+        fontSize: width,
+        duration: 0.5,
+        bottom: '+=32%',
+      },
+      '<'
+    );
+  textTl.pause();
+};
+
+let width = window.innerWidth * 0.11;
+updateTimeline();
 
 textTl
   .to(
@@ -39,8 +86,6 @@ textTl
     '<'
   );
 
-textTl.pause();
-
 const sipka = document.querySelector('.pozadi');
 const bar = document.querySelector('.bar');
 const procenatText = document.querySelector('.procenat');
@@ -71,6 +116,9 @@ addEventListener('resize', () => {
     duration: 0,
   });
 
+  width = window.innerWidth * 0.11;
+  updateTimeline();
+  console.log('WIDTH:' + width);
   height = sipka.clientHeight;
   offsetStart = sipka.getBoundingClientRect().bottom + 10;
 
