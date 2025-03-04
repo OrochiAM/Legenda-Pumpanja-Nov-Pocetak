@@ -24,7 +24,7 @@ body {
   align-items: center;
   height: 35%;
 
-  img {
+  .p {
     height: 100%;
     filter: drop-shadow(3px 3px 6px #12142959);
   }
@@ -95,4 +95,15 @@ body {
 
 .r {
   right: 30px;
+}
+
+.c {
+  position: absolute;
+}
+
+.crevo {
+  top: 53.5%;
+  right: -120%;
+  position: absolute;
+  height: 45%;
 }
