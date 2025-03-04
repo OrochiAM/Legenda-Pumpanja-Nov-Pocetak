@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face {
+  font-family: 'BBBInvader';
+  src: url('../fonts/BBBInvader.otf');
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Comic Sans MS';
+}
+
+body {
+  background-color: #7ba9ff;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.pumpa {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35%;
+
+  img {
+    height: 100%;
+    filter: drop-shadow(3px 3px 6px #12142959);
+  }
+
+  .pozadi {
+    position: absolute;
+    bottom: 20%;
+    z-index: 0;
+  }
+
+  .napred {
+    z-index: 2000;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+.bar {
+  position: absolute;
+  width: 50%;
+  height: 90px;
+  border: solid 10px #3e3131;
+  border-radius: 5px;
+  background-color: #f9f9ff;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+
+  .procenat {
+    font-weight: 900;
+    color: #3e3131;
+    font-size: 40px;
+  }
+}
+
+.pumpaj-text {
+  position: absolute;
+  bottom: 50px;
+  z-index: 2002;
+  font-size: 50px;
+  color: #fff;
+  text-shadow: 10px 10px 0 #000000;
+  display: none;
+}
+
+.layer {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: #3e313185;
+  z-index: 2001;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.exp {
+  position: absolute;
+  z-index: 2002;
+  bottom: 80px;
+  opacity: 0;
+  pointer-events: none;
+  width: 500px;
+}
+
+.l {
+  left: 30px;
+}
+
+.r {
+  right: 30px;
+}
