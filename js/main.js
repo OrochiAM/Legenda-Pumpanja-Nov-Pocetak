@@ -52,40 +52,6 @@ const updateTimeline = () => {
 let width = window.innerWidth * 0.11;
 updateTimeline();
 
-textTl
-  .to(
-    layer,
-    {
-      opacity: 1,
-      duration: 0.5,
-    },
-    '<'
-  )
-  .to(
-    '.exp',
-    {
-      opacity: 1,
-      duration: 1,
-    },
-    '<'
-  )
-  .to(
-    text,
-    {
-      display: 'flex',
-    },
-    '<'
-  )
-  .to(
-    text,
-    {
-      fontSize: width,
-      duration: 0.5,
-      bottom: '+=32%',
-    },
-    '<'
-  );
-
 const sipka = document.querySelector('.pozadi');
 const bar = document.querySelector('.bar');
 const procenatText = document.querySelector('.procenat');
