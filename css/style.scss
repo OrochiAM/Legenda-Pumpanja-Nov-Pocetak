@@ -4,6 +4,11 @@
   src: url('../fonts/BBBInvader.otf');
 }
 
+:root {
+  --white: #f9f9ff;
+  --darker-white: #e4e7fc;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -48,7 +53,7 @@ body {
   height: 90px;
   border: solid 10px #3e3131;
   border-radius: 5px;
-  background-color: #f9f9ff;
+  background-color: var(--white);
   display: flex;
   align-items: center;
   padding-left: 10px;
@@ -65,7 +70,7 @@ body {
   bottom: 50px;
   z-index: 2002;
   font-size: 50px;
-  color: #fff;
+  color: var(--white);
   text-shadow: 10px 10px 0 #000000;
   display: none;
 }
@@ -106,4 +111,45 @@ body {
   right: -120%;
   position: absolute;
   height: 45%;
+}
+
+.coin-counter {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 40px;
+  transition-duration: 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 4px;
+  padding-left: 0.2em;
+
+  .coin-count {
+    color: #000;
+    font-weight: bold;
+  }
+
+  p {
+    user-select: none;
+  }
+}
+
+.shop-button {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  position: absolute;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  left: 10px;
+  top: 10px;
+  background-color: var(--white);
+  border-radius: 4px;
+}
+
+.shop-button:hover {
+  background-color: var(--darker-white);
 }

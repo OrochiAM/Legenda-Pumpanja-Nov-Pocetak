@@ -96,30 +96,48 @@ addEventListener('resize', () => {
   console.log(height + ' ' + offsetStart);
 });
 
+// IGRICIFIKACIJA
+const coinCounter = document.querySelector('.coin-count');
+let coinCount = 0;
+
 // PUMPANJE
+
+const updatePumpBar = () => {
+  bar.style.backgroundImage = `linear-gradient(to right, #FF4F4F 0%, #FF4F4F ${barValue}%, #F9F9FF ${barValue}%)`;
+  procenatText.innerHTML = `${barValue}%`;
+};
+
+const overAnimation = () => {
+  let audioExp = new Audio('sounds/explosion.wav');
+  audioExp.play();
+  textTl.play();
+};
+
+const pumpanje = () => {
+  if (barValue != 110) {
+    let audio = new Audio('sounds/jump.wav');
+    audio.play();
+
+    barValue += 10;
+  }
+
+  if (barValue == 110) {
+    let audio = new Audio('sounds/pickupCoin.wav');
+    audio.play();
+
+    coinCount++;
+    coinCounter.innerHTML = coinCount;
+
+    barValue = 0;
+  }
+};
 
 setInterval(() => {
   let offset = sipka.getBoundingClientRect();
 
   if (offset.bottom == offsetStart && offsetStart != old) {
-    if (barValue != 100) {
-      barValue += 10;
-      bar.style.backgroundImage = `linear-gradient(to right, #FF4F4F 0%, #FF4F4F ${barValue}%, #F9F9FF ${barValue}%)`;
-      procenatText.innerHTML = `${barValue}%`;
-    }
-
-    if (!over && barValue == 100) {
-      let audioExp = new Audio('sounds/explosion.wav');
-      audioExp.play();
-      // let audioPum = new Audio('sounds/pumpaj.mp3');
-      // audioPum.play();
-      console.log('PUMP IT!');
-      textTl.play();
-      over = true;
-    }
-
-    let audio = new Audio('sounds/jump.wav');
-    audio.play();
+    pumpanje();
+    updatePumpBar();
   }
 
   old = offset.bottom;
