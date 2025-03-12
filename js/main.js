@@ -100,6 +100,49 @@ addEventListener('resize', () => {
 const coinCounter = document.querySelector('.coin-count');
 let coinCount = 0;
 
+// SHOP
+const shopOpenButton = document.querySelector('.shop-button');
+const shopCloseButton = document.querySelector('.close-button');
+const shopContainer = document.querySelector('.container');
+const contentSection = document.querySelector('section');
+const pump = document.querySelector('.napred');
+
+// POPUP HANDLE
+shopOpenButton.addEventListener('click', () => {
+  shopContainer.style.display = 'grid';
+});
+
+shopCloseButton.addEventListener('click', () => {
+  shopContainer.style.display = 'none';
+});
+
+// SKINOVI
+let skins = [
+  { naziv: 'No Skin', kupljen: 'true' },
+  { naziv: 'Plavi', kupljen: 'false' },
+  { naziv: 'Petar Jeremic', kupljen: 'false' },
+  { naziv: 'Stiker', kupljen: 'false' },
+];
+
+let skin = 'normal.svg';
+const div = document.createElement('div');
+div.className = 'skin-container';
+
+function changeSkin() {
+  console.log(this);
+  pump.src = `images/skins/${this.innerHTML
+    .replace(' ', '-')
+    .toLowerCase()}.svg`;
+}
+
+for (const skin of skins) {
+  const skinDiv = document.createElement('div');
+  skinDiv.innerHTML = skin.naziv;
+  skinDiv.addEventListener('click', changeSkin);
+  div.appendChild(skinDiv);
+}
+contentSection.appendChild(div);
+
 // PUMPANJE
 
 const updatePumpBar = () => {
