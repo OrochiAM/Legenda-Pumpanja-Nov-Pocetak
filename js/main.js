@@ -130,15 +130,23 @@ div.className = 'skin-container';
 
 function changeSkin() {
   console.log(this);
-  pump.src = `images/skins/${this.innerHTML
+  pump.src = `images/skins/${this.dataset.naziv
     .replace(' ', '-')
     .toLowerCase()}.svg`;
 }
 
 for (const skin of skins) {
+  const p = document.createElement('p');
+  p.innerHTML = skin.naziv;
+
+  const skinImg = document.createElement('div');
+
   const skinDiv = document.createElement('div');
-  skinDiv.innerHTML = skin.naziv;
   skinDiv.addEventListener('click', changeSkin);
+  skinDiv.appendChild(skinImg);
+  skinDiv.appendChild(p);
+  skinDiv.dataset.naziv = skin.naziv;
+
   div.appendChild(skinDiv);
 }
 contentSection.appendChild(div);
