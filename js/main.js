@@ -107,6 +107,11 @@ const shopContainer = document.querySelector('.container');
 const contentSection = document.querySelector('section');
 const pump = document.querySelector('.napred');
 
+// COIN COUNTER HANDLE
+const updateCoins = () => {
+  coinCounter.innerHTML = coinCount;
+};
+
 // POPUP HANDLE
 shopOpenButton.addEventListener('click', () => {
   shopContainer.style.display = 'grid';
@@ -118,35 +123,50 @@ shopCloseButton.addEventListener('click', () => {
 
 // SKINOVI
 let skins = [
-  { naziv: 'No Skin', kupljen: 'true' },
-  { naziv: 'Plavi', kupljen: 'false' },
-  { naziv: 'Petar Jeremic', kupljen: 'false' },
-  { naziv: 'Stiker', kupljen: 'false' },
+  { naziv: 'No Skin', kupljen: true, cena: 0 },
+  { naziv: 'Plavi', kupljen: false, cena: 1 },
+  { naziv: 'Petar', kupljen: false, cena: 69 },
+  { naziv: 'Stiker', kupljen: false, cena: 1 },
 ];
 
-let skin = 'normal.svg';
+const getSvg = (string) => {
+  return `images/skins/${string.replace(' ', '-').toLowerCase()}.svg`;
+};
+
+let skin = 'no-skin.svg';
 const div = document.createElement('div');
 div.className = 'skin-container';
 
+// PROMENA SKINA
 function changeSkin() {
   console.log(this);
-  pump.src = `images/skins/${this.dataset.naziv
-    .replace(' ', '-')
-    .toLowerCase()}.svg`;
+  pump.src = getSvg(skins[this.dataset.id].naziv);
 }
 
-for (const skin of skins) {
-  const p = document.createElement('p');
-  p.innerHTML = skin.naziv;
+for (const skin in skins) {
+  contentSection.innerHTML = '';
+  const naziv = document.createElement('h2');
+  naziv.innerHTML = skins[skin].naziv;
+
+  const cena = document.createElement('p');
+  cena.innerHTML = skins[skin].kupljen ? '✅' : `${skins[skin].cena}🪙`;
 
   const skinImg = document.createElement('div');
+  skinImg.className = 'slika';
+  const img = document.createElement('img');
+  img.src = getSvg(skins[skin].naziv);
+  skinImg.appendChild(img);
+
+  const textDiv = document.createElement('div');
+  textDiv.appendChild(naziv);
+  textDiv.appendChild(cena);
+  textDiv.className = 'text';
 
   const skinDiv = document.createElement('div');
   skinDiv.addEventListener('click', changeSkin);
   skinDiv.appendChild(skinImg);
-  skinDiv.appendChild(p);
-  skinDiv.dataset.naziv = skin.naziv;
-
+  skinDiv.appendChild(textDiv);
+  skinDiv.dataset.id = skin;
   div.appendChild(skinDiv);
 }
 contentSection.appendChild(div);
@@ -177,7 +197,7 @@ const pumpanje = () => {
     audio.play();
 
     coinCount++;
-    coinCounter.innerHTML = coinCount;
+    updateCoins();
 
     barValue = 0;
   }
